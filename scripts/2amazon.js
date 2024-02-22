@@ -1,10 +1,10 @@
 //steps to use Javascript
 //1. Save the data
 //2. generate the html ==> then put it on the page through DOM
-//3. make it inetractive
+//3. make it inetractive ==> Add eventListener to add to cart button
 
 
-//1. save the data + data structure
+//1. save the data + data structure + PART A
 // we will use object as it groups multiple values together
 //toFixed is used to convert number to decibles
 
@@ -45,11 +45,15 @@ const products = [{
 }];
 */
 
+//PART C 
+
 let productsHTML = ''; //add all the html in this variable
 
 //LOOP THROUGH ARRAY ==> save each object and save them in paramemeter which is product and then run function
 //after looping we create html for each product
 //here use product.name as value is stored in product now not products
+
+//PART B
 
 products.forEach((product) => {
   //  const html = --> replaced
@@ -99,15 +103,78 @@ products.forEach((product) => {
       Added
     </div>
 
-    <button class="add-to-cart-button button-primary">
+    <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id ="${product.id}">
       Add to Cart
     </button>
   </div>
   `;
 });
 
-console.log(productsHTML);
 
+
+//PART C
 document.querySelector('.js-products-grid')
  .innerHTML = productsHTML;
+
+
+
+//PART D
+//target all add to cart button
+//loop through each of the button
+ document.querySelectorAll('.js-add-to-cart')
+  .forEach((button) => {
+    button.addEventListener('click', () => {
+      //PART E 
+      //attach product's name to button through data**
+      //it will show product name in  console whose button is clicked
+      const productName = button.dataset.productId;
+      //PART E
+      //add this variable to cart with name and quantity
+
+
+      //PART F
+      //1. check if product is already in the cart
+      //2. if yes then increase the quantity
+      //check if product is in array ===> loop through cart, if productName above equals to item's productName
+      //PART F
+      let matchingItem;
+      cart.forEach((item) => {
+        if (productId === item.productId){
+          //if we find matching item then save in variable
+          matchingItem = item;
+        }
+      });
+
+      if (matchingItem) {
+        //matchingItem is object which is truthy value
+        //add 1 in quantity
+        matchingItem.quantity += 1;
+      } else {
+        //if not in cart then push it in cart
+        cart.push({
+          productId: productId,
+          quantity: 1
+        });
+      }
+
+      /*
+      /PART E
+      cart.push({
+        productName: productName,
+        quantity: 1
+      });
+      */
+      console.log(cart);
+    });
+    
+  });
+
+
+  
+  //PART E
+  //add a product to a cart which is list of product we want to buy and its quantity
+  //represent this as an array contains object
+  //separate cart in other file ==> add products to this cart using data attribute which is id element that is specific to one product
+  //data attribute have to start with "data-" then name(kebab case)
+  //attach product's name to button through data
 
