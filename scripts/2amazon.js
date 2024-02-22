@@ -7,6 +7,9 @@
 //1. save the data + data structure
 // we will use object as it groups multiple values together
 //toFixed is used to convert number to decibles
+
+
+/*
 const products = [{
   image: 'images/products/athletic-cotton-socks-6-pairs.jpg',
   name: 'Black and Gray Athletic Cotton Socks - 6 Pairs',
@@ -31,8 +34,16 @@ const products = [{
     count: 56
   },
   priceCents: 799
+}, {
+  image: 'images/products/black-2-slot-toaster.jpg',
+  name: '2 Slot Toaster - Black',
+  rating: {
+    stars: 5,
+    count: 2197
+  },
+  priceCents: 1899
 }];
-
+*/
 
 let productsHTML = ''; //add all the html in this variable
 
