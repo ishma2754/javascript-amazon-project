@@ -127,7 +127,7 @@ document.querySelector('.js-products-grid')
       //PART E 
       //attach product's name to button through data**
       //it will show product name in  console whose button is clicked
-      const productName = button.dataset.productId;
+      const productId = button.dataset.productId;
       //PART E
       //add this variable to cart with name and quantity
 
@@ -156,7 +156,6 @@ document.querySelector('.js-products-grid')
           quantity: 1
         });
       }
-
       /*
       /PART E
       cart.push({
@@ -164,7 +163,20 @@ document.querySelector('.js-products-grid')
         quantity: 1
       });
       */
-      console.log(cart);
+     //PART G
+     //calculate quantity and put that quantity on page
+     //loop through array and add quantity
+
+      let cartQuantity = 0;
+      cart.forEach((item) => {
+        //add the item's quantity to this variable above
+        cartQuantity += item.quantity;
+
+      });
+
+      document.querySelector('.js-cart-quantity')
+       .innerHTML = cartQuantity;
+      
     });
     
   });
@@ -178,3 +190,6 @@ document.querySelector('.js-products-grid')
   //data attribute have to start with "data-" then name(kebab case)
   //attach product's name to button through data
 
+//PART G
+//calculate quantity and put that quantity on page
+//loop through array and add quantity
