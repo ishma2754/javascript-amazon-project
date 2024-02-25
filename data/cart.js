@@ -1,3 +1,4 @@
 //PART E
 //Add products to this cart
-const cart = [];
+export const cart = []; //export the variable that you want to take out
+

@@ -46,6 +46,9 @@ const products = [{
 */
 
 //PART C 
+import {cart} from '../data/cart.js';//variable we want
+//../ represents the folder we want to be out off
+
 
 let productsHTML = ''; //add all the html in this variable
 
