@@ -130,7 +130,7 @@ document.querySelector('.js-products-grid')
      
 
       
-      const productId = button.dataset.productId;
+      const {productId} = button.dataset;
       //PART E
       //add this variable to cart with name and quantity
 
@@ -159,9 +159,9 @@ document.querySelector('.js-products-grid')
       } else {
         //if not in cart then push it in cart
         cart.push({
-          productId: productId,
+          productId,
           quantity: 1,
-          quantity: quantity
+          quantity
         });
       }
       /*
