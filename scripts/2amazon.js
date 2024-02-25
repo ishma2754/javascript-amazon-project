@@ -46,7 +46,7 @@ const products = [{
 */
 
 //PART C 
-import {cart} from '../data/cart.js';//variable we want
+import {cart, addToCart} from '../data/cart.js';//variable we want
 //../ represents the folder we want to be out off
 import {products} from '../data/products.js';
 
@@ -125,6 +125,53 @@ document.querySelector('.js-products-grid')
 //PART D
 //target all add to cart button
 //loop through each of the button
+//PART H clean code through functions
+/* function addToCart (productId) {
+  let matchingItem;
+  cart.forEach((cartItem) => {
+    if (productId === cartItem.productId){
+      /if we find matching item then save in variable
+      matchingItem = cartItem;
+    }
+  });
+
+  const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
+  const quantity = Number(quantitySelector.value);
+
+  if (matchingItem) {
+    /matchingItem is object which is truthy value
+    /add 1 in quantity
+    matchingItem.quantity += 1;
+    matchingItem.quantity += quantity;
+  } else {
+    /if not in cart then push it in cart
+    cart.push({
+      productId,
+      quantity: 1,
+      quantity
+    });
+  }
+ }
+ */ //shifted to cart js file
+
+ function updateCartQuantity(productId) {
+  let cartQuantity = 0;
+     cart.forEach((cartItem) => {
+       //add the item's quantity to this variable above
+        cartQuantity += cartItem.quantity;
+
+     });
+
+      document.querySelector('.js-cart-quantity')
+      .innerHTML = cartQuantity;
+
+      
+      const addedMessage = document.querySelector(
+      `.js-added-to-cart-${productId}`
+      );
+
+      addedMessage.classList.add('added-to-cart-visible');
+  }
  document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
     button.addEventListener('click', () => {
@@ -133,8 +180,13 @@ document.querySelector('.js-products-grid')
       //it will show product name in  console whose button is clicked
      
 
-      
       const {productId} = button.dataset;
+
+      addToCart(productId);
+      updateCartQuantity(productId);
+    });
+
+  });
       //PART E
       //add this variable to cart with name and quantity
 
@@ -144,30 +196,34 @@ document.querySelector('.js-products-grid')
       //2. if yes then increase the quantity
       //check if product is in array ===> loop through cart, if productName above equals to item's productName
       //PART F
-      let matchingItem;
-      cart.forEach((item) => {
-        if (productId === item.productId){
-          //if we find matching item then save in variable
-          matchingItem = item;
-        }
-      });
 
-      const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
-      const quantity = Number(quantitySelector.value);
+      /**
+       * !let matchingItem;
+       * !cart.forEach((item) => {
+      *! if (productId === item.productId){
+      *!    //if we find matching item then save in variable
+      *!    matchingItem = item;
+      *!  }
+      *!});
 
-      if (matchingItem) {
-        //matchingItem is object which is truthy value
-        //add 1 in quantity
-        matchingItem.quantity += 1;
-        matchingItem.quantity += quantity;
-      } else {
-        //if not in cart then push it in cart
-        cart.push({
-          productId,
-          quantity: 1,
-          quantity
-        });
-      }
+      *!const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
+      *!const quantity = Number(quantitySelector.value);
+
+      *!if (matchingItem) {
+       *! //matchingItem is object which is truthy value
+       *! //add 1 in quantity
+       *! matchingItem.quantity += 1;
+       *! matchingItem.quantity += quantity;
+      *!} else {
+       *! //if not in cart then push it in cart
+       *! cart.push({
+       *!  productId,
+       *!   quantity: 1,
+       *!   quantity
+       *! });
+       */
+     
+      
       /*
       /PART E
       cart.push({
@@ -178,28 +234,29 @@ document.querySelector('.js-products-grid')
      //PART G
      //calculate quantity and put that quantity on page
      //loop through array and add quantity
+    /** 
+    *!  let cartQuantity = 0;
+    *!  cart.forEach((item) => {
+    *!    //add the item's quantity to this variable above
+    *!    cartQuantity += item.quantity;
 
-      let cartQuantity = 0;
-      cart.forEach((item) => {
-        //add the item's quantity to this variable above
-        cartQuantity += item.quantity;
+    *!  });
 
-      });
-
-      document.querySelector('.js-cart-quantity')
-       .innerHTML = cartQuantity;
+    *!  document.querySelector('.js-cart-quantity')
+    *!   .innerHTML = cartQuantity;
 
       
-       const addedMessage = document.querySelector(
-        `.js-added-to-cart-${productId}`
-        );
+    *!   const addedMessage = document.querySelector(
+    *!    `.js-added-to-cart-${productId}`
+    *!    );
   
-        addedMessage.classList.add('added-to-cart-visible');
+    *!    addedMessage.classList.add('added-to-cart-visible');
 
       
-    });
+  *!  });
+    */
     
-  });
+   
 
   
   
