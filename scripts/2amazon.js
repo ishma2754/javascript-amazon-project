@@ -82,7 +82,7 @@ products.forEach((product) => {
     </div>
 
     <div class="product-quantity-container">
-      <select>
+      <select class="js-quantity-selector-${product.id}">
         <option selected value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -127,6 +127,9 @@ document.querySelector('.js-products-grid')
       //PART E 
       //attach product's name to button through data**
       //it will show product name in  console whose button is clicked
+     
+
+      
       const productId = button.dataset.productId;
       //PART E
       //add this variable to cart with name and quantity
@@ -145,15 +148,20 @@ document.querySelector('.js-products-grid')
         }
       });
 
+      const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
+      const quantity = Number(quantitySelector.value);
+
       if (matchingItem) {
         //matchingItem is object which is truthy value
         //add 1 in quantity
         matchingItem.quantity += 1;
+        matchingItem.quantity += quantity;
       } else {
         //if not in cart then push it in cart
         cart.push({
           productId: productId,
-          quantity: 1
+          quantity: 1,
+          quantity: quantity
         });
       }
       /*
@@ -176,12 +184,16 @@ document.querySelector('.js-products-grid')
 
       document.querySelector('.js-cart-quantity')
        .innerHTML = cartQuantity;
+
+      
+
+
       
     });
     
   });
 
-
+  
   
   //PART E
   //add a product to a cart which is list of product we want to buy and its quantity
