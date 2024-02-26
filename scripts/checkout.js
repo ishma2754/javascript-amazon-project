@@ -121,5 +121,21 @@ document.querySelector('.js-order-summary')
       const container = document.querySelector(`.js-cart-item-container-${productId}`);
       container.remove();
     });
+
+    updateCartQuantity();
   });
 
+
+  function updateCartQuantity (){
+    let cartQuantity = 0;
+       cart.forEach((cartItem) => {
+         //add the item's quantity to this variable above
+          cartQuantity += cartItem.quantity;
+  
+       });
+    
+    document.querySelector('.js-display-quantity')
+     .innerHTML = `${cartQuantity} items`;
+    }
+  
+    updateCartQuantity();
