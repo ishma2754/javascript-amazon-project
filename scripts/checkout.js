@@ -120,9 +120,10 @@ document.querySelector('.js-order-summary')
        //update html
       const container = document.querySelector(`.js-cart-item-container-${productId}`);
       container.remove();
+      updateCartQuantity();
     });
 
-    updateCartQuantity();
+    
   });
 
 
