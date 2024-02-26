@@ -23,7 +23,8 @@ cart.forEach((cartItem) => {
   });
 
   cartSummaryHTML += `
-    <div class="cart-item-container">
+    <div class="cart-item-container 
+    js-cart-item-container-${matchingProduct.id}">
     <div class="delivery-date">
       Delivery date: Tuesday, June 21
     </div>
@@ -106,6 +107,7 @@ document.querySelector('.js-order-summary')
 
  //PART H delete button ==> remove product from cart and update html
  //to know which product to delete add product's data id to delete button
+ //update html ==> remove product from page, use remove method ==> first is to see which product to remove by using special class
  document.querySelectorAll('.js-delete-link')
   .forEach((link) => {
     link.addEventListener('click', () => {
@@ -114,6 +116,10 @@ document.querySelector('.js-order-summary')
       //coming from cart js file
       removeFromCart(productId);
        //only one product remained that is basketball not socks in console
+
+       //update html
+      const container = document.querySelector(`.js-cart-item-container-${productId}`);
+      container.remove();
     });
   });
 
