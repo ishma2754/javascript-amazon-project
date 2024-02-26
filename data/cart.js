@@ -1,13 +1,23 @@
 //PART E
 //Add products to this cart
-export let cart = [{
-  productId:'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
-  quantity: 2,
-},{
-  productId: '15b6fc6f-327a-4ec4-896f-486349e85a3d',
-  quantity: 1
-}];// no need to save data twice inside products array and cart array we can search through product id ===> de-duplicating data/normalizing the data
- //export the variable that you want to take out
+export let cart = JSON.parse(localStorage.getItem('cart')); 
+
+//if we don't have  cart or empty to have default value
+if (!cart) {
+  cart = [{
+    productId:'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
+    quantity: 2,
+  },{
+    productId: '15b6fc6f-327a-4ec4-896f-486349e85a3d',
+    quantity: 1
+  }];// no need to save data twice inside products array and cart array we can search through product id ===> de-duplicating data/normalizing the data
+   //export the variable that you want to take out
+}
+
+//PART I OF CHECKOUT JS ==> convert to string
+ function saveToStorage() {
+  localStorage.setItem('cart', JSON.stringify(cart));
+ }
 
 export function addToCart (productId) {
   let matchingItem;
@@ -34,6 +44,8 @@ export function addToCart (productId) {
       quantity
     });
   }
+
+  saveToStorage();
  }
 
 
@@ -54,4 +66,6 @@ export function removeFromCart (productId) {
   });
 
   cart = newCart;
+
+  saveToStorage();
 }
