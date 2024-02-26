@@ -1,9 +1,11 @@
-import {cart} from '../data/cart.js';
+import {cart, removeFromCart} from '../data/cart.js';
 import {products} from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 
 //added matchingId to radio selectors 
 //single dot slash means same folder
+//PART F is creating function of repeated codes like pricecents in utility folder
+//PART G changing radioselector
 
 //PART E combining all html
 let cartSummaryHTML = '';
@@ -44,7 +46,7 @@ cart.forEach((cartItem) => {
           <span class="update-quantity-link link-primary">
             Update
           </span>
-          <span class="delete-quantity-link link-primary">
+          <span class="delete-quantity-link link-primary js-delete-link" data-product-id = "${matchingProduct.id}">
             Delete
           </span>
         </div>
@@ -101,4 +103,17 @@ cart.forEach((cartItem) => {
 
 document.querySelector('.js-order-summary')
  .innerHTML = cartSummaryHTML;
+
+ //PART H delete button ==> remove product from cart and update html
+ //to know which product to delete add product's data id to delete button
+ document.querySelectorAll('.js-delete-link')
+  .forEach((link) => {
+    link.addEventListener('click', () => {
+      const productId = link.dataset.productId;
+      //remove id from cart ==> go to cart js
+      //coming from cart js file
+      removeFromCart(productId);
+       //only one product remained that is basketball not socks in console
+    });
+  });
 

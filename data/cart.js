@@ -1,6 +1,6 @@
 //PART E
 //Add products to this cart
-export const cart = [{
+export let cart = [{
   productId:'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
   quantity: 2,
 },{
@@ -36,3 +36,22 @@ export function addToCart (productId) {
   }
  }
 
+
+
+
+//PART H of delete button in checkout js file
+//1.create a new array 
+//2.loop through the cart
+//3. add new product to the new array, except for this productId
+//add new items to this cart  if it is not equal to the productid we trying to remove we will add others to cart
+export function removeFromCart (productId) {
+  const newCart = [];
+
+  cart.forEach((cartItem) => {
+    if (cartItem.productId !== productId) {
+      newCart.push(cartItem);
+    }
+  });
+
+  cart = newCart;
+}
