@@ -172,7 +172,27 @@ document.querySelector('.js-products-grid')
       );
 
       addedMessage.classList.add('added-to-cart-visible');
+
+      const previousTimeoutId = addedMessageTimeouts[productId];
+      if (previousTimeoutId) {
+        clearTimeout(previousTimeoutId);
+      }
+
+      const timeoutId = setTimeout(() => {
+        addedMessage.classList.remove('added-to-cart-visible');
+      }, 2000);
+
+      // Save the timeoutId for this product
+      // so we can stop it later if we need to.
+      addedMessageTimeouts[productId] = timeoutId;
   }
+  
+ // We're going to use an object to save the timeout ids.
+// The reason we use an object is because each product
+// will have its own timeoutId. So an object lets us
+// save multiple timeout ids for different products.
+ const addedMessageTimeouts = {};
+
  document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
     button.addEventListener('click', () => {
@@ -185,6 +205,7 @@ document.querySelector('.js-products-grid')
 
       addToCart(productId);
       updateCartQuantity(productId);
+    
     });
 
   });
@@ -251,7 +272,11 @@ document.querySelector('.js-products-grid')
     *!    `.js-added-to-cart-${productId}`
     *!    );
   
-    *!    addedMessage.classList.add('added-to-cart-visible');
+    *!    addedMessage.classList.add('add-cart-css');
+
+    *!      setTimeout (function () {
+    *!        addedMessage.classList.remove('add-cart-css');
+    *!      }, 2000);
 
       
   *!  });
