@@ -46,7 +46,7 @@ const products = [{
 */
 
 //PART C 
-import {cart, addToCart} from '../data/cart.js';//variable we want
+import {cart, addToCart, calculateCartQuantity} from '../data/cart.js';//variable we want
 //../ represents the folder we want to be out off
 import {products} from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
@@ -155,43 +155,19 @@ document.querySelector('.js-products-grid')
  }
  */ //shifted to cart js file
 
- function updateCartQuantity(productId) {
-  let cartQuantity = 0;
-     cart.forEach((cartItem) => {
-       //add the item's quantity to this variable above
-        cartQuantity += cartItem.quantity;
+ const addedMessageTimeouts = {};
 
-     });
+ function updateCartQuantity(productId) {
+      const cartQuantity = calculateCartQuantity ();
+
 
       document.querySelector('.js-cart-quantity')
       .innerHTML = cartQuantity;
+  };
 
-      
-      const addedMessage = document.querySelector(
-      `.js-added-to-cart-${productId}`
-      );
-
-      addedMessage.classList.add('added-to-cart-visible');
-
-      const previousTimeoutId = addedMessageTimeouts[productId];
-      if (previousTimeoutId) {
-        clearTimeout(previousTimeoutId);
-      }
-
-      const timeoutId = setTimeout(() => {
-        addedMessage.classList.remove('added-to-cart-visible');
-      }, 2000);
-
-      // Save the timeoutId for this product
-      // so we can stop it later if we need to.
-      addedMessageTimeouts[productId] = timeoutId;
-  }
+  updateCartQuantity();
   
- // We're going to use an object to save the timeout ids.
-// The reason we use an object is because each product
-// will have its own timeoutId. So an object lets us
-// save multiple timeout ids for different products.
- const addedMessageTimeouts = {};
+
 
  document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
@@ -205,6 +181,25 @@ document.querySelector('.js-products-grid')
 
       addToCart(productId);
       updateCartQuantity(productId);
+
+      let addedMessage = document.querySelector(
+        `.js-added-to-cart-${productId}`
+        );
+  
+        addedMessage.classList.add('added-to-cart-visible');
+  
+        const previousTimeoutId = addedMessageTimeouts[productId];
+        if (previousTimeoutId) {
+          clearTimeout(previousTimeoutId);
+        }
+  
+        const timeoutId = setTimeout(() => {
+          addedMessage.classList.remove('added-to-cart-visible');
+        }, 2000);
+  
+        // Save the timeoutId for this product
+        // so we can stop it later if we need to.
+        addedMessageTimeouts[productId] = timeoutId;
     
     });
 
