@@ -54,7 +54,7 @@ export function addToCart (productId) {
 //PART H of delete button in checkout js file
 //1.create a new array 
 //2.loop through the cart
-//3. add new product to the new array, except for this productId
+//3. add new product to the new array, except for this productId that means removing it from cart
 //add new items to this cart  if it is not equal to the productid we trying to remove we will add others to cart
 export function removeFromCart (productId) {
   const newCart = [];
